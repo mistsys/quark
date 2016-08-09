@@ -1,0 +1,9 @@
+http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz
+http://central.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
+http://central.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.0/hadoop-aws-2.7.0.jar
+http://central.maven.org/maven2/org/apache/spark/spark-streaming-kafka_2.10/1.6.0/spark-streaming-kafka_2.10-1.6.0.jar
+http://central.maven.org/maven2/com/datastax/spark/spark-cassandra-connector_2.10/1.6.0-M1/spark-cassandra-connector_2.10-1.6.0-M1.jar
+http://apache.cs.utah.edu/kafka/0.8.2.2/kafka_2.10-0.8.2.2.tgz
+http://archive.apache.org/dist/mesos/0.25.0/mesos-0.25.0.tar.gz
+http://d3kbcqa49mib13.cloudfront.net/spark-2.0.0-bin-hadoop2.7.tgz
+http://mirror.reverse.net/pub/apache/kafka/0.10.0.0/kafka_2.10-0.10.0.0.tgz
