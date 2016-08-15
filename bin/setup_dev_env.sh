@@ -50,25 +50,3 @@ done < $DEPS_FILE
 cat > $INSTALL_DIR/setup-complete<<EOF
 $installed_pkgs
 EOF
-
-## Based on http://docs.python-guide.org/en/latest/dev/virtualenvs/
-## Setup a virtualenv
-if [ "x$SETUP_PYTHON_ENV" = "xtrue" ]; then
-    type mkvirtualenv >/dev/null || install=true
-    type workon >/dev/null || install=true
-    if [ "$install" = "true" ]; then
-        echo "No virtualenv setup, installing"
-        curl -sL https://raw.githubusercontent.com/brainsik/virtualenv-burrito/master/virtualenv-burrito.sh | $SHELL
-        #exit 1
-    fi
-    source ~/.venvburrito/startup.sh
-    mkvirtualenv mist_spark
-    workon mist_spark
-    # switch to using requirements.txt
-    pip install requests
-    pip install pylint
-    pip install jupyter
-    pip install numpy
-    pip install flake8
-    pip install pandas
-fi

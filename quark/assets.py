@@ -135,8 +135,7 @@ class PythonAsset(QuarkAsset):
         else:
             mesosLibPath = os.path.abspath(mesosLibsDir+"/libmesos.so")
         envDict = dict(os.environ,MESOS_NATIVE_JAVA_LIBRARY=mesosLibPath,
-                       PYTHONPATH=pythonPath,
-                       SPARK_JAVA_OPTS=os.getenv("SPARK_JAVA_OPTS", ""))
+                       PYTHONPATH=pythonPath)
         return (execList, envDict)
 
     def deploy(self, args):

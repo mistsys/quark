@@ -1,9 +1,8 @@
-from __future__ import print_function
+from __future__ import print_function, absolute_import
+from .beats import Beat
+from StringIO import StringIO
 import sys
 import os
-from assets import PythonAsset
-from quark_lib.beats import Beat
-from StringIO import StringIO
 import json
 import urllib
 import webbrowser

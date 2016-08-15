@@ -1,17 +1,15 @@
-from __future__ import print_function, division,absolute_import  # We require Python 2.6 or later
+from __future__ import print_function, division, absolute_import  # We require Python 2.6 or later
 import json
 import os
 import glob
-import sys
+from .assets import PythonAsset
 from string import Template
 from subprocess import Popen
-from .assets import PythonAsset
 from .util import DepsResolver
 from .beats import Beat
 
 
-## TODO: abstract this into an interface that can be used to target multiple
-##       deployment environments
+
 class Quark:
     def __init__(self, config, options):
         # Config: operations on the environment
@@ -22,11 +20,7 @@ class Quark:
         schemasDir = os.path.join(projectsDir, "schemas")
         depsDir = self.config.get(self.options.env, "deps_dir")
         self.resolver = DepsResolver(depsDir, self.options.spark_version)
-        beats_schema_path =os.path.join(schemasDir, "beats.schema.json")
-        if os.path.exists(beats_schema_path):
-            self.beats = Beat(open().read())
-        else:
-            self.beats = None
+        self.beats = Beat(file(os.path.join(schemasDir, "beats.schema.json")).read())
 
     def get_asset_type(self,asset_path):
         if asset_path == "python" or asset_path.endswith(".py"):
@@ -34,8 +28,12 @@ class Quark:
         else:
             raise Exception("Unsupported asset type" + asset_path)
 
+
+
+
     def invoke_task(self,name, *args):
         os.environ['ENV'] = self.options.profile
+        os.environ['APPLICATION_CONFIG'] = self.get_config_for_profile(self.options.profile)
         os.environ['JVM_OPTS'] = "-Xms512m -Xmx1024m"
         if args == (None,):
             getattr(self,name)()
@@ -54,10 +52,15 @@ class Quark:
         asset = self.get_asset_type(asset_path)
         asset.validate()
 
+    #def notebook(self, project=None):
+        # It will be the "notebooks" dir in your CWD... easy enough to change if you want to
+        #notebooksDir = "notebooks"
+        #if project != None:
+        #    notebooksDir = os.path.join(notebooksDir,project)
+        #asset = PythonAsset(self.options.env, notebooksDir, self.options.args,self.config)
+        #asset.notebook()
+
     def gen_beats(self, out_file='all_beats.json'):
-        if self.beats == None:
-            print("Cannot generate beats since no schema is provided")
-            sys.exit(1)
         projectsDir = os.path.abspath(self.config.get(self.options.env, "projects_dir"))
         excluded_projects = ["python/common", "python/test", "python/batch_transformer"]
         pythonProjectsDir = os.path.join(os.path.abspath(projectsDir),"python")
