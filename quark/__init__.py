@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from __future__ import print_function
+from __future__ import absolute_import
+from .quark import Quark
 import argparse
 import os
 import sys
@@ -7,7 +9,7 @@ if sys.version_info.major > 2:
     import configparser
 else:
     import ConfigParser as configparser
-from quark_lib.quark import Quark
+
 
 # Kind of sort of like a factory thing
 def invoke_task(instance,options,args):
@@ -16,7 +18,7 @@ def invoke_task(instance,options,args):
     else:
         instance.invoke_task(options.task,options.file, *options.args)
 
-if __name__ == "__main__":
+def main():
     #print(sys.argv)
 
     parser = argparse.ArgumentParser(description='Quark: Because Leptons did not sound cool',
@@ -50,7 +52,7 @@ if __name__ == "__main__":
         sys.exit(0)
     if deployment_environment == "qubole":
         print("Qubole deployment detected", file=sys.stderr)
-        from quark_lib.qubole import Qubole
+        from .qubole import Qubole
         qubole = Qubole(config, options)
         invoke_task(qubole, options, options.args)
     else:
