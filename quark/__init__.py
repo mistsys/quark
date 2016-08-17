@@ -52,6 +52,7 @@ def main():
     if options.task == None:
         if len(options.file) > 0:
             options.task = options.file
+            options.file = None
             if len(options.args) > 0:
                 options.file = options.args[0]
             options.args = options.args[1:]
