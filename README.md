@@ -1,9 +1,19 @@
 # Quark
 
-- Quark is a minimal service that tries to make intricacies of working with Spark less crazy
+- Quark is a minimal tools that tries to make intricacies of working with Spark less crazy
 
+- This is provided online for feedback. It is used in production at Mist but your mileage may vary in usage. 
 
 ## Setting up
+
+In your virtualenv do - 
+`python setup.py install`
+
+In a new fresh directory, do
+
+`quark init`
+
+This will create the necessary directory structures and then run
 
 `./bin/setup-dev-env.sh`
 
