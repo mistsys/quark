@@ -231,15 +231,15 @@ class Quark:
         for jarsDir in jarsDirs:
             allJars.extend(PythonAsset.expandJarsDir(jarsDir))
         jars += ','.join(allJars)
-        print("SPARK_HOME={}".format(sparkDir))
-        print("SPARK_SUBMIT_OPTIONS=--jars {}".format(jars))
+        print("export SPARK_HOME=\"{}\"".format(sparkDir))
+        print("export SPARK_SUBMIT_OPTIONS=\"--jars {}\"".format(jars))
         #TODO full path for projects python
         pythonPaths = [sparkDir+"/python", "projects/python"]
         if language == "python":
             pythonPaths.append(py4jFile)
             pyFiles = map(lambda x: os.path.abspath(x), filter(lambda x: os.path.isfile(x),self.config.get(self.options.env, "py_files").split(",")))
             pythonPaths.extend(pyFiles)
-            print("PYTHONPATH={}:$PYTHONPATH".format(":".join(pythonPaths)))
+            print("export PYTHONPATH=\"{}:$PYTHONPATH\"".format(":".join(pythonPaths)))
 
     def doc(self, action="generate"):
         docsDir =os.path.abspath(self.config.get(self.options.env, "docs_dir"))
